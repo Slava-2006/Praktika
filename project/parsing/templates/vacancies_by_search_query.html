@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансии по запросу №{{ search_query.id }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Добавлен фон */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px; /* Добавлен отступ по краям */
+            color: #333; /* Изменен цвет текста */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный фон формы */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Добавлена тень */
+            padding: 20px; /* Увеличен отступ внутри контейнера */
+            width: 90%;
+            max-width: 1200px; /* Увеличена ширина контейнера */
+            margin-bottom: 20px;
+        }
+
+        .vacancy-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .vacancy-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .vacancy-card h2 {
+            margin-top: 0;
+            color: #ff6f61;
+        }
+
+        .vacancy-card p {
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .vacancy-card a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .vacancy-card a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            background-color: #ff6f61; /* Цвет кнопки "Назад к поиску" */
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none; /* Убрано подчеркивание */
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Переход для анимации */
+        }
+
+        .back-button:hover {
+            background-color: #ff3b2f; /* Изменение цвета и анимации при наведении */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'search_history' %}" class="back-button">Назад к истории поиска</a>
+    <h1>Вакансии по запросу №{{ search_query.id }}</h1>
+    <div class="container">
+        {% if vacancies %}
+            {% for vacancy in vacancies %}
+                <div class="vacancy-card">
+                    <h2>{{ vacancy.title }}</h2>
+                    <p>Компания: {{ vacancy.company_name }}</p>
+                    <p>Местоположение: {{ vacancy.place }}</p>
+                    <p>Требования: {{ vacancy.treb }}</p>
+                    <a href="{{ vacancy.link }}" target="_blank">Подробнее</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Нет вакансий для данного запроса.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

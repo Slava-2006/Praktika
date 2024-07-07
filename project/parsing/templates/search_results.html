@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты поиска</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Добавлен фон */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px; /* Добавлен отступ по краям */
+            color: #333; /* Изменен цвет текста */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный фон формы */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Добавлена тень */
+            padding: 20px; /* Увеличен отступ внутри контейнера */
+            width: 90%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .vacancy-card {
+            background-color: #fff; /* Цвет фона карточки */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень карточки */
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .vacancy-card h2 {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .vacancy-card p {
+            margin: 5px 0;
+        }
+
+        .vacancy-card a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .vacancy-card a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            background-color: #ff6f61; /* Цвет кнопки "Назад к поиску" */
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none; /* Убрано подчеркивание */
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Переход для анимации */
+            margin-left: 60px;
+        }
+
+        .back-button:hover {
+            background-color: #ff3b2f; /* Изменение цвета и анимации при наведении */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+        <a href="/" class="back-button">Назад к поиску</a>
+        <h1>Результаты поиска</h1>
+    
+    <div class="container">
+        {% if filtered_vacancies %}
+            <div style="margin-bottom: 30px;">
+                Найдено {{count}} результатов
+            </div>
+            {% for vacancy in filtered_vacancies %}
+                <div class="vacancy-card">
+                    <h2>{{ vacancy.title }}</h2>
+                    <p>Компания: {{ vacancy.company_name }}</p>
+                    <p>{{ vacancy.place }}</p>
+                    <p>Требования: {{ vacancy.treb }}</p>
+                    <a href="{{ vacancy.link }}" target="_blank">Ссылка на вакансию</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Ничего не найдено по вашему запросу.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

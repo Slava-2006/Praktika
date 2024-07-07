@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История поиска</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Добавлен фон */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px; /* Добавлен отступ по краям */
+            color: #333; /* Изменен цвет текста */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный фон формы */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Добавлена тень */
+            padding: 20px; /* Увеличен отступ внутри контейнера */
+            width: 90%;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .search-query {
+            background-color: #fff; /* Цвет фона карточки */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень карточки */
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-query h2 {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .search-query p {
+            margin: 5px 0;
+        }
+
+        .search-query a {
+            color: #fff;
+        }
+
+        .search-query a:hover {
+            text-decoration: underline;
+        }
+
+        .back-button {
+            background-color: #ff6f61; /* Цвет кнопки "Назад к поиску" */
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none; /* Убрано подчеркивание */
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Переход для анимации */
+        }
+
+        .back-button:hover {
+            background-color: #ff3b2f; /* Изменение цвета и анимации при наведении */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'advanced_search' %}" class="back-button">Назад к поиску</a>
+    <h1>История поиска</h1>
+    <div class="container">
+        {% if search_queries %}
+            {% for search_query in search_queries %}
+                <div class="search-query">
+                    <h2>Запрос №{{ forloop.counter }}</h2>
+                    <p><strong>Город:</strong> {{ search_query.city }}</p>
+                    <p><strong>Тип занятости:</strong> {{ search_query.time_type }}</p>
+                    <p><strong>Компания:</strong> {{ search_query.company }}</p>
+                    <p><strong>Название должности:</strong> {{ search_query.job_title }}</p>
+                    <p><strong>Требования:</strong> {{ search_query.skills }}</p>
+                    <p style="margin-bottom: 25px;"><strong>Дата и время:</strong> {{ search_query.timestamp }}</p>
+                    <a href="{% url 'vacancies_by_search_query' search_query.id %}" class="back-button">Просмотреть вакансии</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>История поиска пуста.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

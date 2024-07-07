@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Поиск вакансий</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg');
+            /* Добавлен фон */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            /* Изменен цвет текста */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* Полупрозрачный фон формы */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            /* Добавлена тень */
+            overflow: hidden;
+            width: 90%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: row;
+            /* Смена расположения на строку */
+        }
+
+        .left-panel {
+            background-color: #ff6f61;
+            /* Изменен цвет фона левого блока */
+            padding: 40px;
+            color: white;
+            text-align: center;
+            flex: 1;
+        }
+
+        .left-panel h1 {
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            /* Тень текста */
+        }
+
+        .right-panel {
+            padding: 40px;
+            flex: 2;
+            /* Расширение правого блока */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            /* Изменен цвет подписей полей */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            /* Цвет рамки полей */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #ff6f61;
+            /* Изменен цвет фона кнопки */
+            color: #fff;
+            padding: 12px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            /* Переход для анимации */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff3b2f;
+            /* Изменение цвета и анимации при наведении */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .his_cont {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .text1 {
+            color: #ff6f61;
+            /* Изменен цвет ссылки */
+            text-decoration: none;
+        }
+
+        .text1:hover {
+            text-decoration: underline;
+            /* Подчеркнутая ссылка при наведении */
+        }
+
+        select {
+            width: 100%;
+            /* Ширина элемента 100% от родительского контейнера */
+            padding: 10px;
+            /* Внутренний отступ */
+            margin-bottom: 15px;
+            /* Отступ снизу */
+            font-size: 16px;
+            /* Размер шрифта */
+            border: 1px solid #ccc;
+            /* Рамка */
+            border-radius: 5px;
+            /* Скругление углов */
+            box-sizing: border-box;
+            /* Учитывать padding и border в расчете ширины */
+        }
+
+        /* Стили для опций <option> внутри <select> */
+        select option {
+            padding: 10px;
+            /* Внутренний отступ */
+            font-size: 16px;
+            /* Размер шрифта */
+            border-bottom: 1px solid #ddd;
+            /* Рамка снизу */
+        }
+
+        /* Стили для опции, когда она выбрана <option:selected> */
+        select option:checked {
+            background-color: #f0f0f0;
+            /* Цвет фона при выборе */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Поиск вакансий</h1>
+            <p>Находите лучшие предложения работы в вашем городе</p>
+        </div>
+        <div class="right-panel">
+            <form action="/advanced_search/" method="post">
+                {% csrf_token %}
+                <label for="city">Город:</label>
+                <select id="city" name="city">
+                    <option value="">Выберите город</option>
+                    <option value="c_685">Белгород</option>
+                    <option value="c_690">Волгоград</option>
+                    <option value="c_692">Воронеж</option>
+                    <option value="c_696">Иркутск</option>
+                    <option value="c_698">Казань</option>
+                    <option value="c_699">Калининград</option>
+                    <option value="c_700">Калуга</option>
+                    <option value="c_710">Курсr</option>
+                    <option value="c_712">Липецк</option>
+                    <option value="c_715">Нижний Новгород</option>
+                    <option value="c_716">Новокузнецк</option>
+                    <option value="c_718">Омск</option>
+                    <option value="c_719">Орел</option>
+                    <option value="c_720">Оренбург</option>
+                    <option value="c_724">Псков</option>
+                    <option value="c_726">Ростов-На-Дону</option>
+                    <option value="c_737">Тула</option>
+                    <option value="c_740">Уфа</option>
+                    <option value="c_741">Хабаровск</option>
+                    <option value="c_743">Чебоксары</option>
+                    <option value="c_746">Якутск</option>
+                </select>
+                <label for="time_type">Тип занятости:</label>
+                <select id="time_type" name="time_type">
+                    <option value="">Любой</option>
+                    <option value="full_time">Полный рабочий день</option>
+                    <option value="part_time">Неполный рабочий день</option>
+                </select>
+                <label for="company">Компания:</label>
+                <input type="text" id="company" name="company"><br>
+                <label for="job_title">Название должности:</label>
+                <input type="text" id="job_title" name="job_title"><br>
+                <label for="skills">Требования:</label>
+                <input type="text" id="skills" name="skills"><br>
+                <input type="submit" value="Поиск">
+                <div class="his_cont">
+                    <a href="/search_history/" class="text1">История запросов</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+
+</html>
